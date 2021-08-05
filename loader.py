@@ -1,11 +1,14 @@
 import pandas as pd
 import re
 import os
+import gensim.downloader as api
 
 HTML_TAG_RE = re.compile(r'<[^>]+>')
 AT_RE = re.compile(r'@[\w]+')
 HASHTAG_RE = re.compile(r'@[\w]+')
 NON_ALPHANUM = re.compile(r'#[\W]')
+
+W2V_EMBEDDING_DIM = 300
 
 
 def remove_tags(text):
@@ -40,4 +43,7 @@ def load_imdb_data():
     return movie_reviews
 
 
+def load_pretrained_w2v():
+    w2v = api.load("word2vec-google-news-300")
+    return w2v
 
