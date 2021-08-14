@@ -49,6 +49,13 @@ def load_pretrained_w2v():
 
 
 def load_disneyland_data():
-    movie_reviews = pd.read_csv("./data/DisneylandReviews.csv")
-    movie_reviews['review'] = movie_reviews['review'].apply(preprocess_text)
-    return movie_reviews
+    disney_reviews = pd.read_csv("./data/DisneylandReviews.csv")
+    needed_columns_dict = dict()
+    needed_columns_dict['review'] = disney_reviews['Review_Text'].apply(preprocess_text)
+    # TODO currently anything below 5 is considered negative since disneyland is supposed to be super exciting. Also created pretty equal datasets
+    needed_columns_dict['sentiment'] = disney_reviews['Rating'].apply(lambda score: "positive" if score > 4 else "negative")
+    needed_reviews = pd.DataFrame(needed_columns_dict)
+    return needed_reviews
+
+def load_tweets_data():
+    pass
