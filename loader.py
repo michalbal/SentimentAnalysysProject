@@ -47,3 +47,8 @@ def load_pretrained_w2v():
     w2v = api.load("word2vec-google-news-300")
     return w2v
 
+
+def load_disneyland_data():
+    movie_reviews = pd.read_csv("./data/DisneylandReviews.csv")
+    movie_reviews['review'] = movie_reviews['review'].apply(preprocess_text)
+    return movie_reviews
