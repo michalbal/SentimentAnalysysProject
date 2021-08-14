@@ -4,7 +4,7 @@ import numpy as np
 import nltk
 from wordcloud import WordCloud,STOPWORDS
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score,confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.linear_model import LogisticRegression,SGDClassifier
 import gensim.downloader as api
 from sklearn.model_selection import train_test_split
@@ -122,7 +122,7 @@ def explore_disney_data(disney_reviews):
 
 
 def create_disney_models_and_split_data():
-    # Load imdb reviews data
+    # Load disney reviews data
     disney_reviews = loader.load_disneyland_data()
     print(disney_reviews.head())
     # explore_disney_data(disney_reviews)
@@ -133,34 +133,57 @@ def create_disney_models_and_split_data():
 # ---------------------------------------------------- Tweet data
 
 
-def explore_tweets_data(disney_reviews):
+def explore_tweets_data(tweets):
     # Show how many positive and negative values exist
-    print(disney_reviews['sentiment'].value_counts())
+    print(tweets['sentiment'].value_counts())
 
-    positive_reviews = disney_reviews[disney_reviews['sentiment'] == 'positive']
+    positive_tweets = tweets[tweets['sentiment'] == 'positive']
+    positive_words = ' '.join(positive_tweets['review'])
+    show_word_cloud(positive_words)
+
+    negative_tweets = tweets[tweets['sentiment'] == 'negative']
+    negative_words = ' '.join(negative_tweets['review'])
+    show_word_cloud(negative_words)
+
+
+def create_tweets_models_and_split_data():
+    # Load tweets data
+    tweets = loader.load_tweets_data()
+    print(tweets.head())
+    explore_tweets_data(tweets)
+
+    # return create_model_and_split_data(tweets, "Tweets")
+
+# ---------------------------------------------------- Tweet data
+
+
+def explore_amazon_data(reviews):
+    # Show how many positive and negative values exist
+    print(reviews['sentiment'].value_counts())
+
+    positive_reviews = reviews[reviews['sentiment'] == 'positive']
     positive_words = ' '.join(positive_reviews['review'])
     show_word_cloud(positive_words)
 
-    negative_reviews = disney_reviews[disney_reviews['sentiment'] == 'negative']
+    negative_reviews = reviews[reviews['sentiment'] == 'negative']
     negative_words = ' '.join(negative_reviews['review'])
     show_word_cloud(negative_words)
 
     # Now let's see the most common words without the words both Negative and Positive share
-    disney_stopwords = set(STOPWORDS).union(
-        {'ride', 'park', 'day', 'time', 'disneyland', 'disney', 'rides', 'one', 'go', 'kid'})
-    show_word_cloud(positive_words, disney_stopwords)
+    amazon_stopwords = set(STOPWORDS).union(
+        {'product', 'one', 'time'})
+    show_word_cloud(positive_words, amazon_stopwords)
 
-    show_word_cloud(negative_words, disney_stopwords)
+    show_word_cloud(negative_words, amazon_stopwords)
 
 
-def create_tweets_models_and_split_data():
-    # Load imdb reviews data
-    disney_reviews = loader.load_disneyland_data()
-    print(disney_reviews.head())
-    # explore_disney_data(disney_reviews)
+def create_amazon_models_and_split_data():
+    # Load amazon reviews data
+    reviews = loader.load_amazon_data()
+    print(reviews.head())
+    explore_amazon_data(reviews)
 
-    return create_model_and_split_data(disney_reviews, "Disney")
-
+    # return create_model_and_split_data(reviews, "Amazon")
 
 # ----------------------------------------------------
 
@@ -175,7 +198,9 @@ if __name__ == '__main__':
     #
     # imdb_svm_model, imdb_logistic_model, imdb_x_test, imdb_y_test = create_imdb_models_and_split_data()
 
-    disney_svm_model, disney_logistic_model, disney_x_test, disney_y_test = create_disney_models_and_split_data()
+    # disney_svm_model, disney_logistic_model, disney_x_test, disney_y_test = create_disney_models_and_split_data()
+    # create_tweets_models_and_split_data()
+    create_amazon_models_and_split_data()
 
 
 

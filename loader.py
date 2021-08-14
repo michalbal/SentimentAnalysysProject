@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import os
 import gensim.downloader as api
+import tensorflow_datasets as tfds
 
 HTML_TAG_RE = re.compile(r'<[^>]+>')
 AT_RE = re.compile(r'@[\w]+')
@@ -18,7 +19,6 @@ def remove_tags(text):
 
 
 def preprocess_text(sen):
-
     sentence = sen.lower()
 
     # Remove html tags and hashtags
@@ -33,6 +33,9 @@ def preprocess_text(sen):
 
     # Remove multiple spaces
     sentence = re.sub(r'\s+', ' ', sentence)
+
+    # Needed for amazon reviews
+    sentence = re.sub('b ', '', sentence)
 
     return sentence
 
@@ -57,5 +60,25 @@ def load_disneyland_data():
     needed_reviews = pd.DataFrame(needed_columns_dict)
     return needed_reviews
 
+
 def load_tweets_data():
-    pass
+    tweets = pd.read_csv("./data/Tweets.csv")
+    needed_columns_dict = dict()
+    tweets = tweets[tweets['airline_sentiment'] != 'neutral']
+    needed_columns_dict['review'] = tweets['text'].apply(preprocess_text)
+    needed_columns_dict['sentiment'] = tweets['airline_sentiment']
+    needed_reviews = pd.DataFrame(needed_columns_dict)
+    return needed_reviews
+
+
+def load_amazon_data():
+    # Needed to download the first time
+    # reviews_ds = tfds.load('amazon_us_reviews/Personal_Care_Appliances_v1_00', split='train', shuffle_files=True)
+    # reviews = tfds.as_dataframe(reviews_ds)
+    # reviews.to_csv("./data/amazon_reviews.csv")
+    reviews = pd.read_csv("./data/amazon_reviews.csv")
+    needed_columns_dict = dict()
+    needed_columns_dict['review'] = reviews['data/review_body'].apply(preprocess_text)
+    needed_columns_dict['sentiment'] = reviews['data/star_rating'].apply(lambda score: "positive" if score > 3 else "negative")
+    needed_reviews = pd.DataFrame(needed_columns_dict)
+    return needed_reviews
