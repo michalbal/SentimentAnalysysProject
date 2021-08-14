@@ -73,8 +73,7 @@ def create_imdb_models_and_split_data():
 
     # explore_imdb_data(movie_reviews)
 
-    movie_reviews_encoded = movie_reviews['review'].apply(
-        turn_sentence_to_encoding)
+    movie_reviews_encoded = [turn_sentence_to_encoding(sentance) for sentance in movie_reviews['review']]
 
     sentiment = movie_reviews['sentiment'].map({'positive': 1, 'negative': 0})
     X_train, X_test, y_train, y_test = train_test_split(
@@ -83,10 +82,16 @@ def create_imdb_models_and_split_data():
     imdb_svm = SGDClassifier()
     imdb_svm.fit(X_train, y_train)
 
-    accuracy_imdb_on_imdb = imdb_svm.score(X_test, y_test)
-    print("Imdb svm accuracy on test is: ", accuracy_imdb_on_imdb)
+    accuracy_imdb_svm_on_imdb = imdb_svm.score(X_test, y_test)
+    print("Imdb svm accuracy on test is: ", accuracy_imdb_svm_on_imdb)
 
-    return imdb_svm, "soon_to_be_model" , X_test, y_test
+    imdb_logistic = LogisticRegression()
+    imdb_logistic.fit(X_train, y_train)
+
+    accuracy_imdb_logistic_on_imdb = imdb_logistic.score(X_test, y_test)
+    print("Imdb logistic accuracy on test is: ", accuracy_imdb_logistic_on_imdb)
+
+    return imdb_svm, imdb_logistic, X_test, y_test
 
 # ----------------------------------------------------
 
