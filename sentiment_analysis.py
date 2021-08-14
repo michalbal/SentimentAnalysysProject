@@ -4,7 +4,8 @@ import numpy as np
 import nltk
 from wordcloud import WordCloud,STOPWORDS
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, \
+    plot_confusion_matrix
 from sklearn.linear_model import LogisticRegression,SGDClassifier
 import gensim.downloader as api
 from sklearn.model_selection import train_test_split
@@ -67,6 +68,31 @@ def create_model_and_split_data(reviews, data_name):
 
     return svm_model, logistic_model, X_test, y_test
 
+
+def show_models_results_on_data(first_model, second_model, third_model, fourth_model, x_test, y_test, comparison_name, data_name):
+    print(comparison_name)
+
+    show_model_success_on_dataset(first_model, "first_model", x_test, y_test)
+
+    show_model_success_on_dataset(second_model, "second_model", x_test, y_test)
+
+    show_model_success_on_dataset(third_model, "third_model", x_test, y_test)
+
+    show_model_success_on_dataset(fourth_model, "fourth_model", x_test, y_test)
+
+    # TODO add graph that shows all models together - Accuracy, recall, f1
+
+
+def show_model_success_on_dataset(model, model_name, x_test, y_test):
+    # Confusion Matrix is a table showing from left top: TP, FN, FP, TN
+    y_predicted = model.predict(x_test)
+    print(model_name, " accuracy: ",
+          accuracy_score(y_predicted, y_test))
+    cm = confusion_matrix(y_predicted, y_test)
+    print(model_name, " confusion matrix is: ", cm)
+    plt.figure()
+    plot_confusion_matrix(cm)
+    plt.show()
 
 # ---------------------------------------------------- IMDB data
 
@@ -189,18 +215,19 @@ def create_amazon_models_and_split_data():
 
 if __name__ == '__main__':
     # Get pretrained w2v model - it is of length 300, containing 100 million words
-    # w2v_model = api.load("word2vec-google-news-300")
-    #
-    # # Create general stopwords
-    # GENERAL_STOPWORDS = set(STOPWORDS)
-    # GENERAL_STOPWORDS.remove('not')
-    # GENERAL_STOPWORDS.remove('no')
-    #
-    # imdb_svm_model, imdb_logistic_model, imdb_x_test, imdb_y_test = create_imdb_models_and_split_data()
+    w2v_model = api.load("word2vec-google-news-300")
 
-    # disney_svm_model, disney_logistic_model, disney_x_test, disney_y_test = create_disney_models_and_split_data()
+    # Create general stopwords
+    GENERAL_STOPWORDS = set(STOPWORDS)
+    GENERAL_STOPWORDS.remove('not')
+    GENERAL_STOPWORDS.remove('no')
+
+    imdb_svm_model, imdb_logistic_model, imdb_x_test, imdb_y_test = create_imdb_models_and_split_data()
+
+    disney_svm_model, disney_logistic_model, disney_x_test, disney_y_test = create_disney_models_and_split_data()
+    show_model_success_on_dataset(imdb_svm_model, "imdb_svm_model", disney_x_test, disney_y_test)
     # create_tweets_models_and_split_data()
-    create_amazon_models_and_split_data()
+    # create_amazon_models_and_split_data()
 
 
 
