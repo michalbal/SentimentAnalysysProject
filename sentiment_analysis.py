@@ -59,7 +59,7 @@ def create_model_and_split_data(reviews, data_name):
     accuracy_svm_on_test = svm_model.score(X_test, y_test)
     print(data_name, " svm accuracy on test is: ", accuracy_svm_on_test)
 
-    logistic_model = LogisticRegression()
+    logistic_model = LogisticRegression(max_iter=300)
     logistic_model.fit(X_train, y_train)
 
     accuracy_logistic_on_test = logistic_model.score(X_test, y_test)
@@ -91,7 +91,7 @@ def show_model_success_on_dataset(model, model_name, x_test, y_test):
     cm = confusion_matrix(y_predicted, y_test)
     print(model_name, " confusion matrix is: ", cm)
     plt.figure()
-    plot_confusion_matrix(cm)
+    plot_confusion_matrix(model, x_test, y_test)
     plt.show()
 
 # ---------------------------------------------------- IMDB data
