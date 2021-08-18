@@ -47,7 +47,6 @@ def show_word_cloud(texsts, data_name, stopwords=STOPWORDS):
     fig.savefig(plot_path)
 
 
-
 def create_model_and_split_data(reviews, data_name):
     reviews_encoded = [turn_sentence_to_encoding(sentance) for sentance in reviews['review']]
 
@@ -58,7 +57,7 @@ def create_model_and_split_data(reviews, data_name):
     X_train, X_test, y_train, y_test = train_test_split(
         reviews_encoded, sentiment, test_size=0.2, random_state=42)
 
-    svm_model_path = ".\data\\"+ data_name + "_svm_model.pkl"
+    svm_model_path = ".\models\\"+ data_name + "_svm_model.pkl"
     if not os.path.exists(svm_model_path):
         svm_model = SGDClassifier()
         svm_model.fit(X_train, y_train)
@@ -69,7 +68,7 @@ def create_model_and_split_data(reviews, data_name):
     accuracy_svm_on_test = svm_model.score(X_test, y_test)
     print(data_name, " svm accuracy on test is: ", accuracy_svm_on_test)
 
-    logistic_model_path = ".\data\\" + data_name + "_logistic_model.pkl"
+    logistic_model_path = ".\models\\" + data_name + "_logistic_model.pkl"
     if not os.path.exists(logistic_model_path):
         logistic_model = LogisticRegression(max_iter=300)
         logistic_model.fit(X_train, y_train)
@@ -120,7 +119,7 @@ def compare_models_results_via_plot(models, model_names, x_test, y_test, data_na
     for i in range(len(models)):
         model = models[i]
         model_name = model_names[i]
-        yproba = model.predict_proba(x_test)[::, 1]
+        yproba = model.decision_function(x_test)
         fpr, tpr, _ = roc_curve(y_test, yproba)
         auc = roc_auc_score(y_test, yproba)
         result_table = result_table.append(
@@ -181,7 +180,7 @@ def create_imdb_models_and_split_data():
     # Load imdb reviews data
     movie_reviews = loader.load_imdb_data()
     print(movie_reviews.head())
-    explore_imdb_data(movie_reviews)
+    # explore_imdb_data(movie_reviews)
 
     return create_model_and_split_data(movie_reviews, "IMDB")
 
@@ -212,7 +211,7 @@ def create_disney_models_and_split_data():
     # Load disney reviews data
     disney_reviews = loader.load_disneyland_data()
     print(disney_reviews.head())
-    explore_disney_data(disney_reviews)
+    # explore_disney_data(disney_reviews)
 
     return create_model_and_split_data(disney_reviews, "disney")
 
@@ -237,7 +236,7 @@ def create_tweets_models_and_split_data():
     # Load tweets data
     tweets = loader.load_tweets_data()
     print(tweets.head())
-    explore_tweets_data(tweets)
+    # explore_tweets_data(tweets)
 
     return create_model_and_split_data(tweets, "tweets")
 
@@ -268,7 +267,7 @@ def create_amazon_models_and_split_data():
     # Load amazon reviews data
     reviews = loader.load_amazon_data()
     print(reviews.head())
-    explore_amazon_data(reviews)
+    # explore_amazon_data(reviews)
 
     return create_model_and_split_data(reviews, "amazon")
 

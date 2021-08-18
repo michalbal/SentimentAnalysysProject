@@ -55,7 +55,7 @@ def load_pretrained_w2v():
     if not os.path.exists(w2v_model_path):
         all_words = get_all_words()
         w2v = api.load("word2vec-google-news-300")
-        w2v_embeddings = {word: w2v[word] for word in all_words if word in w2v.vocab.keys()}
+        w2v_embeddings = {word: w2v[word] for word in all_words if word in w2v}
         with open(w2v_model_path, "wb") as file:
             pickle.dump(w2v_embeddings, file)
         return w2v_embeddings
