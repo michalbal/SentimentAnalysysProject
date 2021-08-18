@@ -3,6 +3,7 @@ import re
 import os
 import gensim.downloader as api
 import tensorflow_datasets as tfds
+import pickle
 
 HTML_TAG_RE = re.compile(r'<[^>]+>')
 AT_RE = re.compile(r'@[\w]+')
@@ -47,8 +48,47 @@ def load_imdb_data():
 
 
 def load_pretrained_w2v():
-    w2v = api.load("word2vec-google-news-300")
-    return w2v
+    """
+    Returns a pretrained w2v model, only on the words in the datasets.
+    """
+    w2v_model_path = "./models/w2v_model.pkl"
+    if not os.path.exists(w2v_model_path):
+        all_words = get_all_words()
+        w2v = api.load("word2vec-google-news-300")
+        w2v_embeddings = {word: w2v[word] for word in all_words if word in w2v.vocab.keys()}
+        with open(w2v_model_path, "wb") as file:
+            pickle.dump(w2v_embeddings, file)
+        return w2v_embeddings
+    else:
+        with open(w2v_model_path, "rb") as file:
+            return pickle.load(file)
+
+
+def get_all_words():
+    """
+    Retrieve the words in all datasets
+    :return: A set containing all the words in all the datasets
+    """
+    all_words = set()
+    imdb_data = load_imdb_data()
+    all_words = all_words.union(get_all_words_from_reviews(imdb_data))
+    disney_data = load_disneyland_data()
+    all_words = all_words.union(get_all_words_from_reviews(disney_data))
+    amazon_data = load_amazon_data()
+    all_words = all_words.union(get_all_words_from_reviews(amazon_data))
+    tweets_data = load_tweets_data()
+    all_words = all_words.union(get_all_words_from_reviews(tweets_data))
+    return all_words
+
+
+def get_all_words_from_reviews(dataset: pd.DataFrame):
+    all_words = set()
+    reviews = dataset['review']
+    for review in reviews:
+        words = set(review.split())
+        all_words = all_words.union(words)
+
+    return all_words
 
 
 def load_disneyland_data():
@@ -64,7 +104,11 @@ def load_disneyland_data():
 def load_tweets_data():
     tweets = pd.read_csv("./data/Tweets.csv")
     needed_columns_dict = dict()
-    tweets = tweets[tweets['airline_sentiment'] != 'neutral']
+
+    tweets['airline_sentiment'] = tweets['airline_sentiment'].apply(lambda sentiment: "positive" if sentiment == "neutral" or sentiment == "positive" else "negative")
+
+    # tweets = tweets[tweets['airline_sentiment'] != 'neutral']
+
     needed_columns_dict['review'] = tweets['text'].apply(preprocess_text)
     needed_columns_dict['sentiment'] = tweets['airline_sentiment']
     needed_reviews = pd.DataFrame(needed_columns_dict)
