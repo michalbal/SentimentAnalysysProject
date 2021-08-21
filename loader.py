@@ -96,7 +96,7 @@ def load_disneyland_data():
     needed_columns_dict = dict()
     needed_columns_dict['review'] = disney_reviews['Review_Text'].apply(preprocess_text)
     # TODO currently anything below 5 is considered negative since disneyland is supposed to be super exciting. Also created pretty equal datasets
-    needed_columns_dict['sentiment'] = disney_reviews['Rating'].apply(lambda score: "positive" if score > 4 else "negative")
+    needed_columns_dict['sentiment'] = disney_reviews['Rating'].apply(lambda score: "positive" if score > 3 else "negative")
     needed_reviews = pd.DataFrame(needed_columns_dict)
     return needed_reviews
 
@@ -105,9 +105,9 @@ def load_tweets_data():
     tweets = pd.read_csv("./data/Tweets.csv")
     needed_columns_dict = dict()
 
-    tweets['airline_sentiment'] = tweets['airline_sentiment'].apply(lambda sentiment: "positive" if sentiment == "neutral" or sentiment == "positive" else "negative")
+    # tweets['airline_sentiment'] = tweets['airline_sentiment'].apply(lambda sentiment: "positive" if sentiment == "neutral" or sentiment == "positive" else "negative")
 
-    # tweets = tweets[tweets['airline_sentiment'] != 'neutral']
+    tweets = tweets[tweets['airline_sentiment'] != 'neutral']
 
     needed_columns_dict['review'] = tweets['text'].apply(preprocess_text)
     needed_columns_dict['sentiment'] = tweets['airline_sentiment']

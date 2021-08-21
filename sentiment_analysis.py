@@ -211,7 +211,7 @@ def create_disney_models_and_split_data():
     # Load disney reviews data
     disney_reviews = loader.load_disneyland_data()
     print(disney_reviews.head())
-    # explore_disney_data(disney_reviews)
+    explore_disney_data(disney_reviews)
 
     return create_model_and_split_data(disney_reviews, "disney")
 
@@ -236,7 +236,7 @@ def create_tweets_models_and_split_data():
     # Load tweets data
     tweets = loader.load_tweets_data()
     print(tweets.head())
-    # explore_tweets_data(tweets)
+    explore_tweets_data(tweets)
 
     return create_model_and_split_data(tweets, "tweets")
 
@@ -305,48 +305,48 @@ if __name__ == '__main__':
                        "amazon_logistic_model"]
 
     # Compare all svm models on IMDB data
-    show_models_results_on_data(svm_models, svm_models_names, imdb_x_test, imdb_y_test, "Comparing SVM models on IMDB", "IMDB")
+    show_models_results_on_data(svm_models, svm_models_names, imdb_x_test, imdb_y_test, "Comparing SVM models on IMDB", "IMDB_SVM")
 
     # Compare all logistic models on IMDB data
     show_models_results_on_data(logistic_models, logistic_models_names, imdb_x_test,
                                 imdb_y_test, "Comparing Logistic models on IMDB",
-                                "IMDB")
+                                "IMDB_logistic")
 
     # Compare all svm models on disney data
     show_models_results_on_data(svm_models, svm_models_names, disney_x_test,
                                 disney_y_test, "Comparing SVM models on disney",
-                                "disney")
+                                "disney_svm")
 
     # Compare all logistic models on disney data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 disney_x_test,
                                 disney_y_test,
                                 "Comparing Logistic models on disney",
-                                "disney")
+                                "disney_logistic")
 
     # Compare all svm models on tweets data
 
     show_models_results_on_data(svm_models, svm_models_names, tweets_x_test,
                                 tweets_y_test, "Comparing SVM models on tweets",
-                                "tweets")
+                                "tweets_svm")
     # Compare all logistic models on tweets data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 tweets_x_test,
                                 tweets_y_test,
                                 "Comparing Logistic models on tweets",
-                                "tweets")
+                                "tweets_logistic")
 
     # Compare all svm models on amazon data
 
     show_models_results_on_data(svm_models, svm_models_names, amazon_x_test,
                                 amazon_y_test, "Comparing SVM models on amazon",
-                                "amazon")
+                                "amazon_svm")
     # Compare all logistic models on amazon data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 amazon_x_test,
                                 amazon_y_test,
                                 "Comparing Logistic models on amazon",
-                                "amazon")
+                                "amazon_logistic")
 
 
 
