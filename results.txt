@@ -1,0 +1,1500 @@
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+Regular :
+------------------------------------------------------------------------------------------
+                                              review sentiment
+0  one of the other reviewers has mentioned that ...  positive
+1  a wonderful little production the filming tech...  positive
+2  i thought this was wonderful way to spend time...  positive
+3  basically there a family where little boy jake...  negative
+4  petter mattei love in the time of money is vis...  positive
+negative    25000
+positive    25000
+Name: sentiment, dtype: int64
+IMDB average words 220.96254
+count IMDB under than 50 1319
+IMDB  svm accuracy on test is:  0.8514
+IMDB  logistic accuracy on test is:  0.8514
+                                              review sentiment
+0  if you ve ever been to disneyland anywhere you...  positive
+1  its been while since last time we visit hk dis...  positive
+2  thanks god it wasn too hot or too humid when w...  positive
+3  hk disneyland is great compact park unfortunat...  positive
+4  the location is not in the city took around ho...  positive
+positive    33921
+negative     8735
+Name: sentiment, dtype: int64
+disney average words 125.05323987246811
+count disney under than 50 13168
+disney  svm accuracy on test is:  0.8477496483825597
+disney  logistic accuracy on test is:  0.8611111111111112
+                                              review sentiment
+1   plus you ve added commercials to the experien...  positive
+3   it really aggressive to blast obnoxious enter...  negative
+4             and it a really big bad thing about it  negative
+5   seriously would pay flight for seats that did...  negative
+6   yes nearly every time fly vx this ear worm wo...  positive
+negative    9178
+positive    2363
+Name: sentiment, dtype: int64
+tweets average words 18.03405250844814
+count tweets under than 50 11541
+tweets  svm accuracy on test is:  0.9129493287137289
+tweets  logistic accuracy on test is:  0.913382416630576
+                                              review sentiment
+0  these glasses are an excellent value the fit i...  positive
+1  always wanted to try straight razor shaving as...  positive
+2  usually either throw my toothbrush in plastic ...  positive
+3                                       top quality   positive
+4  today received fl oz natures balance alkamax a...  negative
+positive    62554
+negative    23427
+Name: sentiment, dtype: int64
+amazon average words 60.51636989567463
+count amazon under than 50 53018
+amazon  svm accuracy on test is:  0.8313659359190556
+amazon  logistic accuracy on test is:  0.8415421294411816
+Comparing SVM models on IMDB
+imdb_svm_model  accuracy:  0.8514
+imdb_svm_model  confusion matrix is: 
+ [[4205  730]
+ [ 756 4309]]
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      4961
+           1       0.85      0.86      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_svm_model  accuracy:  0.7121
+disney_svm_model  confusion matrix is: 
+ [[2536  454]
+ [2425 4585]]
+              precision    recall  f1-score   support
+
+           0       0.85      0.51      0.64      4961
+           1       0.65      0.91      0.76      5039
+
+    accuracy                           0.71     10000
+   macro avg       0.75      0.71      0.70     10000
+weighted avg       0.75      0.71      0.70     10000
+
+tweets_svm_model  accuracy:  0.5424
+tweets_svm_model  confusion matrix is: 
+ [[4946 4561]
+ [  15  478]]
+              precision    recall  f1-score   support
+
+           0       0.52      1.00      0.68      4961
+           1       0.97      0.09      0.17      5039
+
+    accuracy                           0.54     10000
+   macro avg       0.74      0.55      0.43     10000
+weighted avg       0.75      0.54      0.43     10000
+
+amazon_svm_model  accuracy:  0.7133
+amazon_svm_model  confusion matrix is: 
+ [[2341  247]
+ [2620 4792]]
+              precision    recall  f1-score   support
+
+           0       0.90      0.47      0.62      4961
+           1       0.65      0.95      0.77      5039
+
+    accuracy                           0.71     10000
+   macro avg       0.78      0.71      0.69     10000
+weighted avg       0.77      0.71      0.70     10000
+
+Comparing Logistic models on IMDB
+imdb_logistic_model  accuracy:  0.8514
+imdb_logistic_model  confusion matrix is: 
+ [[4230  755]
+ [ 731 4284]]
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      4961
+           1       0.85      0.85      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_logistic_model  accuracy:  0.7634
+disney_logistic_model  confusion matrix is: 
+ [[3352  757]
+ [1609 4282]]
+              precision    recall  f1-score   support
+
+           0       0.82      0.68      0.74      4961
+           1       0.73      0.85      0.78      5039
+
+    accuracy                           0.76     10000
+   macro avg       0.77      0.76      0.76     10000
+weighted avg       0.77      0.76      0.76     10000
+
+tweets_logistic_model  accuracy:  0.5515
+tweets_logistic_model  confusion matrix is: 
+ [[4939 4463]
+ [  22  576]]
+              precision    recall  f1-score   support
+
+           0       0.53      1.00      0.69      4961
+           1       0.96      0.11      0.20      5039
+
+    accuracy                           0.55     10000
+   macro avg       0.74      0.55      0.45     10000
+weighted avg       0.75      0.55      0.44     10000
+
+amazon_logistic_model  accuracy:  0.7578
+amazon_logistic_model  confusion matrix is: 
+ [[2970  431]
+ [1991 4608]]
+              precision    recall  f1-score   support
+
+           0       0.87      0.60      0.71      4961
+           1       0.70      0.91      0.79      5039
+
+    accuracy                           0.76     10000
+   macro avg       0.79      0.76      0.75     10000
+weighted avg       0.79      0.76      0.75     10000
+
+Comparing SVM models on disney
+imdb_svm_model  accuracy:  0.8327473042662916
+imdb_svm_model  confusion matrix is: 
+ [[ 736  408]
+ [1019 6369]]
+              precision    recall  f1-score   support
+
+           0       0.64      0.42      0.51      1755
+           1       0.86      0.94      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.75      0.68      0.70      8532
+weighted avg       0.82      0.83      0.82      8532
+
+disney_svm_model  accuracy:  0.8477496483825597
+disney_svm_model  confusion matrix is: 
+ [[ 606  150]
+ [1149 6627]]
+              precision    recall  f1-score   support
+
+           0       0.80      0.35      0.48      1755
+           1       0.85      0.98      0.91      6777
+
+    accuracy                           0.85      8532
+   macro avg       0.83      0.66      0.70      8532
+weighted avg       0.84      0.85      0.82      8532
+
+tweets_svm_model  accuracy:  0.4289732770745429
+tweets_svm_model  confusion matrix is: 
+ [[1692 4809]
+ [  63 1968]]
+              precision    recall  f1-score   support
+
+           0       0.26      0.96      0.41      1755
+           1       0.97      0.29      0.45      6777
+
+    accuracy                           0.43      8532
+   macro avg       0.61      0.63      0.43      8532
+weighted avg       0.82      0.43      0.44      8532
+
+amazon_svm_model  accuracy:  0.8025082044069386
+amazon_svm_model  confusion matrix is: 
+ [[ 114   44]
+ [1641 6733]]
+              precision    recall  f1-score   support
+
+           0       0.72      0.06      0.12      1755
+           1       0.80      0.99      0.89      6777
+
+    accuracy                           0.80      8532
+   macro avg       0.76      0.53      0.50      8532
+weighted avg       0.79      0.80      0.73      8532
+
+Comparing Logistic models on disney
+imdb_logistic_model  accuracy:  0.8326300984528833
+imdb_logistic_model  confusion matrix is: 
+ [[ 764  437]
+ [ 991 6340]]
+              precision    recall  f1-score   support
+
+           0       0.64      0.44      0.52      1755
+           1       0.86      0.94      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.75      0.69      0.71      8532
+weighted avg       0.82      0.83      0.82      8532
+
+disney_logistic_model  accuracy:  0.8611111111111112
+disney_logistic_model  confusion matrix is: 
+ [[ 848  278]
+ [ 907 6499]]
+              precision    recall  f1-score   support
+
+           0       0.75      0.48      0.59      1755
+           1       0.88      0.96      0.92      6777
+
+    accuracy                           0.86      8532
+   macro avg       0.82      0.72      0.75      8532
+weighted avg       0.85      0.86      0.85      8532
+
+tweets_logistic_model  accuracy:  0.4363572433192686
+tweets_logistic_model  confusion matrix is: 
+ [[1688 4742]
+ [  67 2035]]
+              precision    recall  f1-score   support
+
+           0       0.26      0.96      0.41      1755
+           1       0.97      0.30      0.46      6777
+
+    accuracy                           0.44      8532
+   macro avg       0.62      0.63      0.44      8532
+weighted avg       0.82      0.44      0.45      8532
+
+amazon_logistic_model  accuracy:  0.8087201125175809
+amazon_logistic_model  confusion matrix is: 
+ [[ 239  116]
+ [1516 6661]]
+              precision    recall  f1-score   support
+
+           0       0.67      0.14      0.23      1755
+           1       0.81      0.98      0.89      6777
+
+    accuracy                           0.81      8532
+   macro avg       0.74      0.56      0.56      8532
+weighted avg       0.79      0.81      0.75      8532
+
+Comparing SVM models on tweets
+imdb_svm_model  accuracy:  0.7323516673884799
+imdb_svm_model  confusion matrix is: 
+ [[1317   73]
+ [ 545  374]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.71      0.81      1862
+           1       0.41      0.84      0.55       447
+
+    accuracy                           0.73      2309
+   macro avg       0.68      0.77      0.68      2309
+weighted avg       0.84      0.73      0.76      2309
+
+disney_svm_model  accuracy:  0.671286271113036
+disney_svm_model  confusion matrix is: 
+ [[1158   55]
+ [ 704  392]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.62      0.75      1862
+           1       0.36      0.88      0.51       447
+
+    accuracy                           0.67      2309
+   macro avg       0.66      0.75      0.63      2309
+weighted avg       0.84      0.67      0.71      2309
+
+tweets_svm_model  accuracy:  0.9129493287137289
+tweets_svm_model  confusion matrix is: 
+ [[1813  152]
+ [  49  295]]
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.95      1862
+           1       0.86      0.66      0.75       447
+
+    accuracy                           0.91      2309
+   macro avg       0.89      0.82      0.85      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_svm_model  accuracy:  0.5885664789952361
+amazon_svm_model  confusion matrix is: 
+ [[941  29]
+ [921 418]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.51      0.66      1862
+           1       0.31      0.94      0.47       447
+
+    accuracy                           0.59      2309
+   macro avg       0.64      0.72      0.57      2309
+weighted avg       0.84      0.59      0.63      2309
+
+Comparing Logistic models on tweets
+imdb_logistic_model  accuracy:  0.7388479861411866
+imdb_logistic_model  confusion matrix is: 
+ [[1334   75]
+ [ 528  372]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.72      0.82      1862
+           1       0.41      0.83      0.55       447
+
+    accuracy                           0.74      2309
+   macro avg       0.68      0.77      0.68      2309
+weighted avg       0.84      0.74      0.76      2309
+
+disney_logistic_model  accuracy:  0.7180597661325249
+disney_logistic_model  confusion matrix is: 
+ [[1289   78]
+ [ 573  369]]
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.80      1862
+           1       0.39      0.83      0.53       447
+
+    accuracy                           0.72      2309
+   macro avg       0.67      0.76      0.66      2309
+weighted avg       0.84      0.72      0.75      2309
+
+tweets_logistic_model  accuracy:  0.913382416630576
+tweets_logistic_model  confusion matrix is: 
+ [[1809  147]
+ [  53  300]]
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.95      1862
+           1       0.85      0.67      0.75       447
+
+    accuracy                           0.91      2309
+   macro avg       0.89      0.82      0.85      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_logistic_model  accuracy:  0.6652230402771763
+amazon_logistic_model  confusion matrix is: 
+ [[1127   38]
+ [ 735  409]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.61      0.74      1862
+           1       0.36      0.91      0.51       447
+
+    accuracy                           0.67      2309
+   macro avg       0.66      0.76      0.63      2309
+weighted avg       0.85      0.67      0.70      2309
+
+Comparing SVM models on amazon
+imdb_svm_model  accuracy:  0.7525149735418969
+imdb_svm_model  confusion matrix is: 
+ [[3338 2908]
+ [1348 9603]]
+              precision    recall  f1-score   support
+
+           0       0.53      0.71      0.61      4686
+           1       0.88      0.77      0.82     12511
+
+    accuracy                           0.75     17197
+   macro avg       0.71      0.74      0.71     17197
+weighted avg       0.78      0.75      0.76     17197
+
+disney_svm_model  accuracy:  0.7847880444263534
+disney_svm_model  confusion matrix is: 
+ [[ 2006  1021]
+ [ 2680 11490]]
+              precision    recall  f1-score   support
+
+           0       0.66      0.43      0.52      4686
+           1       0.81      0.92      0.86     12511
+
+    accuracy                           0.78     17197
+   macro avg       0.74      0.67      0.69     17197
+weighted avg       0.77      0.78      0.77     17197
+
+tweets_svm_model  accuracy:  0.49200441937547246
+tweets_svm_model  confusion matrix is: 
+ [[4527 8577]
+ [ 159 3934]]
+              precision    recall  f1-score   support
+
+           0       0.35      0.97      0.51      4686
+           1       0.96      0.31      0.47     12511
+
+    accuracy                           0.49     17197
+   macro avg       0.65      0.64      0.49     17197
+weighted avg       0.79      0.49      0.48     17197
+
+amazon_svm_model  accuracy:  0.8313659359190556
+amazon_svm_model  confusion matrix is: 
+ [[ 2226   440]
+ [ 2460 12071]]
+              precision    recall  f1-score   support
+
+           0       0.83      0.48      0.61      4686
+           1       0.83      0.96      0.89     12511
+
+    accuracy                           0.83     17197
+   macro avg       0.83      0.72      0.75     17197
+weighted avg       0.83      0.83      0.81     17197
+
+Comparing Logistic models on amazon
+imdb_logistic_model  accuracy:  0.7540268651508985
+imdb_logistic_model  confusion matrix is: 
+ [[3299 2843]
+ [1387 9668]]
+              precision    recall  f1-score   support
+
+           0       0.54      0.70      0.61      4686
+           1       0.87      0.77      0.82     12511
+
+    accuracy                           0.75     17197
+   macro avg       0.71      0.74      0.71     17197
+weighted avg       0.78      0.75      0.76     17197
+
+disney_logistic_model  accuracy:  0.7852532418445077
+disney_logistic_model  confusion matrix is: 
+ [[ 2649  1656]
+ [ 2037 10855]]
+              precision    recall  f1-score   support
+
+           0       0.62      0.57      0.59      4686
+           1       0.84      0.87      0.85     12511
+
+    accuracy                           0.79     17197
+   macro avg       0.73      0.72      0.72     17197
+weighted avg       0.78      0.79      0.78     17197
+
+tweets_logistic_model  accuracy:  0.48805024132116065
+tweets_logistic_model  confusion matrix is: 
+ [[4521 8639]
+ [ 165 3872]]
+              precision    recall  f1-score   support
+
+           0       0.34      0.96      0.51      4686
+           1       0.96      0.31      0.47     12511
+
+    accuracy                           0.49     17197
+   macro avg       0.65      0.64      0.49     17197
+weighted avg       0.79      0.49      0.48     17197
+
+amazon_logistic_model  accuracy:  0.8415421294411816
+amazon_logistic_model  confusion matrix is: 
+ [[ 2756   795]
+ [ 1930 11716]]
+              precision    recall  f1-score   support
+
+           0       0.78      0.59      0.67      4686
+           1       0.86      0.94      0.90     12511
+
+    accuracy                           0.84     17197
+   macro avg       0.82      0.76      0.78     17197
+weighted avg       0.84      0.84      0.83     17197
+
+
+Process finished with exit code 0
+
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+Without domain specifis stopwords :
+------------------------------------------------------------------------------------------
+
+C:\Users\shaharl\Anaconda3\envs\pythonProject\python.exe C:/Users/shaharl/Desktop/shahar/SentimentAnalysysProject/sentiment_analysis.py
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+                                              review sentiment
+0  one of the other reviewers has mentioned that ...  positive
+1  a wonderful little production the filming tech...  positive
+2  i thought this was wonderful way to spend time...  positive
+3  basically there a family where little boy jake...  negative
+4  petter mattei love in the time of money is vis...  positive
+negative    25000
+positive    25000
+Name: sentiment, dtype: int64
+IMDB average words 220.96254
+count IMDB under than 50 1319
+IMDB  svm accuracy on test is:  0.8495
+IMDB  logistic accuracy on test is:  0.8509
+                                              review sentiment
+0  if you ve ever been to disneyland anywhere you...  positive
+1  its been while since last time we visit hk dis...  positive
+2  thanks god it wasn too hot or too humid when w...  positive
+3  hk disneyland is great compact park unfortunat...  positive
+4  the location is not in the city took around ho...  positive
+positive    33921
+negative     8735
+Name: sentiment, dtype: int64
+disney average words 125.05323987246811
+count disney under than 50 13168
+disney  svm accuracy on test is:  0.853961556493202
+disney  logistic accuracy on test is:  0.8626347866854196
+                                              review sentiment
+1   plus you ve added commercials to the experien...  positive
+3   it really aggressive to blast obnoxious enter...  negative
+4             and it a really big bad thing about it  negative
+5   seriously would pay flight for seats that did...  negative
+6   yes nearly every time fly vx this ear worm wo...  positive
+negative    9178
+positive    2363
+Name: sentiment, dtype: int64
+tweets average words 18.03405250844814
+count tweets under than 50 11541
+tweets  svm accuracy on test is:  0.9129493287137289
+tweets  logistic accuracy on test is:  0.9112169770463404
+                                              review sentiment
+0  these glasses are an excellent value the fit i...  positive
+1  always wanted to try straight razor shaving as...  positive
+2  usually either throw my toothbrush in plastic ...  positive
+3                                       top quality   positive
+4  today received fl oz natures balance alkamax a...  negative
+positive    62554
+negative    23427
+Name: sentiment, dtype: int64
+amazon average words 60.51636989567463
+count amazon under than 50 53018
+amazon  svm accuracy on test is:  0.8329359772053265
+amazon  logistic accuracy on test is:  0.8420654765366052
+Comparing SVM models on IMDB
+imdb_svm_model  accuracy:  0.8495
+imdb_svm_model  confusion matrix is: 
+ [[4119  663]
+ [ 842 4376]]
+              precision    recall  f1-score   support
+
+           0       0.86      0.83      0.85      4961
+           1       0.84      0.87      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_svm_model  accuracy:  0.73
+disney_svm_model  confusion matrix is: 
+ [[2780  519]
+ [2181 4520]]
+              precision    recall  f1-score   support
+
+           0       0.84      0.56      0.67      4961
+           1       0.67      0.90      0.77      5039
+
+    accuracy                           0.73     10000
+   macro avg       0.76      0.73      0.72     10000
+weighted avg       0.76      0.73      0.72     10000
+
+tweets_svm_model  accuracy:  0.5553
+tweets_svm_model  confusion matrix is: 
+ [[4938 4424]
+ [  23  615]]
+              precision    recall  f1-score   support
+
+           0       0.53      1.00      0.69      4961
+           1       0.96      0.12      0.22      5039
+
+    accuracy                           0.56     10000
+   macro avg       0.75      0.56      0.45     10000
+weighted avg       0.75      0.56      0.45     10000
+
+amazon_svm_model  accuracy:  0.6809
+amazon_svm_model  confusion matrix is: 
+ [[1914  144]
+ [3047 4895]]
+              precision    recall  f1-score   support
+
+           0       0.93      0.39      0.55      4961
+           1       0.62      0.97      0.75      5039
+
+    accuracy                           0.68     10000
+   macro avg       0.77      0.68      0.65     10000
+weighted avg       0.77      0.68      0.65     10000
+
+Comparing Logistic models on IMDB
+imdb_logistic_model  accuracy:  0.8509
+imdb_logistic_model  confusion matrix is: 
+ [[4147  677]
+ [ 814 4362]]
+              precision    recall  f1-score   support
+
+           0       0.86      0.84      0.85      4961
+           1       0.84      0.87      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_logistic_model  accuracy:  0.7689
+disney_logistic_model  confusion matrix is: 
+ [[3469  819]
+ [1492 4220]]
+              precision    recall  f1-score   support
+
+           0       0.81      0.70      0.75      4961
+           1       0.74      0.84      0.79      5039
+
+    accuracy                           0.77     10000
+   macro avg       0.77      0.77      0.77     10000
+weighted avg       0.77      0.77      0.77     10000
+
+tweets_logistic_model  accuracy:  0.5653
+tweets_logistic_model  confusion matrix is: 
+ [[4929 4315]
+ [  32  724]]
+              precision    recall  f1-score   support
+
+           0       0.53      0.99      0.69      4961
+           1       0.96      0.14      0.25      5039
+
+    accuracy                           0.57     10000
+   macro avg       0.75      0.57      0.47     10000
+weighted avg       0.75      0.57      0.47     10000
+
+amazon_logistic_model  accuracy:  0.7347
+amazon_logistic_model  confusion matrix is: 
+ [[2598  290]
+ [2363 4749]]
+              precision    recall  f1-score   support
+
+           0       0.90      0.52      0.66      4961
+           1       0.67      0.94      0.78      5039
+
+    accuracy                           0.73     10000
+   macro avg       0.78      0.73      0.72     10000
+weighted avg       0.78      0.73      0.72     10000
+
+Comparing SVM models on disney
+imdb_svm_model  accuracy:  0.8325128926394749
+imdb_svm_model  confusion matrix is: 
+ [[ 832  506]
+ [ 923 6271]]
+              precision    recall  f1-score   support
+
+           0       0.62      0.47      0.54      1755
+           1       0.87      0.93      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.75      0.70      0.72      8532
+weighted avg       0.82      0.83      0.82      8532
+
+disney_svm_model  accuracy:  0.853961556493202
+disney_svm_model  confusion matrix is: 
+ [[ 717  208]
+ [1038 6569]]
+              precision    recall  f1-score   support
+
+           0       0.78      0.41      0.54      1755
+           1       0.86      0.97      0.91      6777
+
+    accuracy                           0.85      8532
+   macro avg       0.82      0.69      0.72      8532
+weighted avg       0.85      0.85      0.84      8532
+
+tweets_svm_model  accuracy:  0.45264885138302857
+tweets_svm_model  confusion matrix is: 
+ [[1673 4588]
+ [  82 2189]]
+              precision    recall  f1-score   support
+
+           0       0.27      0.95      0.42      1755
+           1       0.96      0.32      0.48      6777
+
+    accuracy                           0.45      8532
+   macro avg       0.62      0.64      0.45      8532
+weighted avg       0.82      0.45      0.47      8532
+
+amazon_svm_model  accuracy:  0.8053211439287389
+amazon_svm_model  confusion matrix is: 
+ [[ 150   56]
+ [1605 6721]]
+              precision    recall  f1-score   support
+
+           0       0.73      0.09      0.15      1755
+           1       0.81      0.99      0.89      6777
+
+    accuracy                           0.81      8532
+   macro avg       0.77      0.54      0.52      8532
+weighted avg       0.79      0.81      0.74      8532
+
+Comparing Logistic models on disney
+imdb_logistic_model  accuracy:  0.8335677449601501
+imdb_logistic_model  confusion matrix is: 
+ [[ 875  540]
+ [ 880 6237]]
+              precision    recall  f1-score   support
+
+           0       0.62      0.50      0.55      1755
+           1       0.88      0.92      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.75      0.71      0.72      8532
+weighted avg       0.82      0.83      0.83      8532
+
+disney_logistic_model  accuracy:  0.8626347866854196
+disney_logistic_model  confusion matrix is: 
+ [[ 942  359]
+ [ 813 6418]]
+              precision    recall  f1-score   support
+
+           0       0.72      0.54      0.62      1755
+           1       0.89      0.95      0.92      6777
+
+    accuracy                           0.86      8532
+   macro avg       0.81      0.74      0.77      8532
+weighted avg       0.85      0.86      0.85      8532
+
+tweets_logistic_model  accuracy:  0.45698546647913735
+tweets_logistic_model  confusion matrix is: 
+ [[1673 4551]
+ [  82 2226]]
+              precision    recall  f1-score   support
+
+           0       0.27      0.95      0.42      1755
+           1       0.96      0.33      0.49      6777
+
+    accuracy                           0.46      8532
+   macro avg       0.62      0.64      0.45      8532
+weighted avg       0.82      0.46      0.48      8532
+
+amazon_logistic_model  accuracy:  0.8122362869198312
+amazon_logistic_model  confusion matrix is: 
+ [[ 282  129]
+ [1473 6648]]
+              precision    recall  f1-score   support
+
+           0       0.69      0.16      0.26      1755
+           1       0.82      0.98      0.89      6777
+
+    accuracy                           0.81      8532
+   macro avg       0.75      0.57      0.58      8532
+weighted avg       0.79      0.81      0.76      8532
+
+Comparing SVM models on tweets
+imdb_svm_model  accuracy:  0.7349501948895626
+imdb_svm_model  confusion matrix is: 
+ [[1315   65]
+ [ 547  382]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.71      0.81      1862
+           1       0.41      0.85      0.56       447
+
+    accuracy                           0.73      2309
+   macro avg       0.68      0.78      0.68      2309
+weighted avg       0.85      0.73      0.76      2309
+
+disney_svm_model  accuracy:  0.6656561281940234
+disney_svm_model  confusion matrix is: 
+ [[1143   53]
+ [ 719  394]]
+              precision    recall  f1-score   support
+
+           0       0.96      0.61      0.75      1862
+           1       0.35      0.88      0.51       447
+
+    accuracy                           0.67      2309
+   macro avg       0.65      0.75      0.63      2309
+weighted avg       0.84      0.67      0.70      2309
+
+tweets_svm_model  accuracy:  0.9129493287137289
+tweets_svm_model  confusion matrix is: 
+ [[1810  149]
+ [  52  298]]
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.95      1862
+           1       0.85      0.67      0.75       447
+
+    accuracy                           0.91      2309
+   macro avg       0.89      0.82      0.85      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_svm_model  accuracy:  0.5911650064963188
+amazon_svm_model  confusion matrix is: 
+ [[945  27]
+ [917 420]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.51      0.67      1862
+           1       0.31      0.94      0.47       447
+
+    accuracy                           0.59      2309
+   macro avg       0.64      0.72      0.57      2309
+weighted avg       0.84      0.59      0.63      2309
+
+Comparing Logistic models on tweets
+imdb_logistic_model  accuracy:  0.7371156344737981
+imdb_logistic_model  confusion matrix is: 
+ [[1323   68]
+ [ 539  379]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.71      0.81      1862
+           1       0.41      0.85      0.56       447
+
+    accuracy                           0.74      2309
+   macro avg       0.68      0.78      0.68      2309
+weighted avg       0.85      0.74      0.76      2309
+
+disney_logistic_model  accuracy:  0.714595062797748
+disney_logistic_model  confusion matrix is: 
+ [[1279   76]
+ [ 583  371]]
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.80      1862
+           1       0.39      0.83      0.53       447
+
+    accuracy                           0.71      2309
+   macro avg       0.67      0.76      0.66      2309
+weighted avg       0.84      0.71      0.74      2309
+
+tweets_logistic_model  accuracy:  0.9112169770463404
+tweets_logistic_model  confusion matrix is: 
+ [[1801  144]
+ [  61  303]]
+              precision    recall  f1-score   support
+
+           0       0.93      0.97      0.95      1862
+           1       0.83      0.68      0.75       447
+
+    accuracy                           0.91      2309
+   macro avg       0.88      0.82      0.85      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_logistic_model  accuracy:  0.6647899523603291
+amazon_logistic_model  confusion matrix is: 
+ [[1125   37]
+ [ 737  410]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.60      0.74      1862
+           1       0.36      0.92      0.51       447
+
+    accuracy                           0.66      2309
+   macro avg       0.66      0.76      0.63      2309
+weighted avg       0.85      0.66      0.70      2309
+
+Comparing SVM models on amazon
+imdb_svm_model  accuracy:  0.7568761993370937
+imdb_svm_model  confusion matrix is: 
+ [[3247 2742]
+ [1439 9769]]
+              precision    recall  f1-score   support
+
+           0       0.54      0.69      0.61      4686
+           1       0.87      0.78      0.82     12511
+
+    accuracy                           0.76     17197
+   macro avg       0.71      0.74      0.72     17197
+weighted avg       0.78      0.76      0.77     17197
+
+disney_svm_model  accuracy:  0.7866488340989708
+disney_svm_model  confusion matrix is: 
+ [[ 2026  1009]
+ [ 2660 11502]]
+              precision    recall  f1-score   support
+
+           0       0.67      0.43      0.52      4686
+           1       0.81      0.92      0.86     12511
+
+    accuracy                           0.79     17197
+   macro avg       0.74      0.68      0.69     17197
+weighted avg       0.77      0.79      0.77     17197
+
+tweets_svm_model  accuracy:  0.5028784090248299
+tweets_svm_model  confusion matrix is: 
+ [[4508 8371]
+ [ 178 4140]]
+              precision    recall  f1-score   support
+
+           0       0.35      0.96      0.51      4686
+           1       0.96      0.33      0.49     12511
+
+    accuracy                           0.50     17197
+   macro avg       0.65      0.65      0.50     17197
+weighted avg       0.79      0.50      0.50     17197
+
+amazon_svm_model  accuracy:  0.8329359772053265
+amazon_svm_model  confusion matrix is: 
+ [[ 2270   457]
+ [ 2416 12054]]
+              precision    recall  f1-score   support
+
+           0       0.83      0.48      0.61      4686
+           1       0.83      0.96      0.89     12511
+
+    accuracy                           0.83     17197
+   macro avg       0.83      0.72      0.75     17197
+weighted avg       0.83      0.83      0.82     17197
+
+Comparing Logistic models on amazon
+imdb_logistic_model  accuracy:  0.7594347851369425
+imdb_logistic_model  confusion matrix is: 
+ [[3194 2645]
+ [1492 9866]]
+              precision    recall  f1-score   support
+
+           0       0.55      0.68      0.61      4686
+           1       0.87      0.79      0.83     12511
+
+    accuracy                           0.76     17197
+   macro avg       0.71      0.74      0.72     17197
+weighted avg       0.78      0.76      0.77     17197
+
+disney_logistic_model  accuracy:  0.7846135953945456
+disney_logistic_model  confusion matrix is: 
+ [[ 2662  1680]
+ [ 2024 10831]]
+              precision    recall  f1-score   support
+
+           0       0.61      0.57      0.59      4686
+           1       0.84      0.87      0.85     12511
+
+    accuracy                           0.78     17197
+   macro avg       0.73      0.72      0.72     17197
+weighted avg       0.78      0.78      0.78     17197
+
+tweets_logistic_model  accuracy:  0.49938942838867245
+tweets_logistic_model  confusion matrix is: 
+ [[4510 8433]
+ [ 176 4078]]
+              precision    recall  f1-score   support
+
+           0       0.35      0.96      0.51      4686
+           1       0.96      0.33      0.49     12511
+
+    accuracy                           0.50     17197
+   macro avg       0.65      0.64      0.50     17197
+weighted avg       0.79      0.50      0.49     17197
+
+amazon_logistic_model  accuracy:  0.8420654765366052
+amazon_logistic_model  confusion matrix is: 
+ [[ 2804   834]
+ [ 1882 11677]]
+              precision    recall  f1-score   support
+
+           0       0.77      0.60      0.67      4686
+           1       0.86      0.93      0.90     12511
+
+    accuracy                           0.84     17197
+   macro avg       0.82      0.77      0.78     17197
+weighted avg       0.84      0.84      0.84     17197
+
+
+Process finished with exit code 0
+
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+limit to 50 words :
+------------------------------------------------------------------------------------------
+count words:
+IMDB average words 220.96254
+disney average words 125.05323987246811
+tweets average words 18.03405250844814
+amazon average words 60.51636989567463
+
+under 50 words:
+IMDB: 1319 / 50,000
+disney: 13168 / 42656
+tweets: 11541 / 11541
+amazon: 53018 / 85981
+
+C:\Users\shaharl\Anaconda3\envs\pythonProject\python.exe C:/Users/shaharl/Desktop/shahar/SentimentAnalysysProject/sentiment_analysis.py
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+In C:\Users\shaharl\Anaconda3\envs\pythonProject\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+                                              review sentiment
+0  one of the other reviewers has mentioned that ...  positive
+1  a wonderful little production the filming tech...  positive
+2  i thought this was wonderful way to spend time...  positive
+3  basically there a family where little boy jake...  negative
+4  petter mattei love in the time of money is vis...  positive
+positive    790
+negative    637
+Name: sentiment, dtype: int64
+IMDB average words 41.240364400840924
+count IMDB under than 50 1319
+IMDB  svm accuracy on test is:  0.8509
+IMDB  logistic accuracy on test is:  0.8514
+                                              review sentiment
+0  if you ve ever been to disneyland anywhere you...  positive
+1  its been while since last time we visit hk dis...  positive
+2  thanks god it wasn too hot or too humid when w...  positive
+3  hk disneyland is great compact park unfortunat...  positive
+4  the location is not in the city took around ho...  positive
+positive    11889
+negative     1632
+Name: sentiment, dtype: int64
+disney average words 33.59396494342135
+count disney under than 50 13168
+disney  svm accuracy on test is:  0.8653305203938115
+disney  logistic accuracy on test is:  0.8611111111111112
+                                              review sentiment
+1   plus you ve added commercials to the experien...  positive
+3   it really aggressive to blast obnoxious enter...  negative
+4             and it a really big bad thing about it  negative
+5   seriously would pay flight for seats that did...  negative
+6   yes nearly every time fly vx this ear worm wo...  positive
+negative    9178
+positive    2363
+Name: sentiment, dtype: int64
+tweets average words 18.03405250844814
+count tweets under than 50 11541
+tweets  svm accuracy on test is:  0.9129493287137289
+tweets  logistic accuracy on test is:  0.913382416630576
+                                              review sentiment
+0  these glasses are an excellent value the fit i...  positive
+1  always wanted to try straight razor shaving as...  positive
+2  usually either throw my toothbrush in plastic ...  positive
+3                                       top quality   positive
+4  today received fl oz natures balance alkamax a...  negative
+positive    40209
+negative    13445
+Name: sentiment, dtype: int64
+amazon average words 24.574849964587916
+count amazon under than 50 53018
+amazon  svm accuracy on test is:  0.8393324417049486
+amazon  logistic accuracy on test is:  0.8415421294411816
+Comparing SVM models on IMDB
+imdb_svm_model  accuracy:  0.8509
+imdb_svm_model  confusion matrix is: 
+ [[4232  762]
+ [ 729 4277]]
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      4961
+           1       0.85      0.85      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_svm_model  accuracy:  0.7726
+disney_svm_model  confusion matrix is: 
+ [[3840 1153]
+ [1121 3886]]
+              precision    recall  f1-score   support
+
+           0       0.77      0.77      0.77      4961
+           1       0.78      0.77      0.77      5039
+
+    accuracy                           0.77     10000
+   macro avg       0.77      0.77      0.77     10000
+weighted avg       0.77      0.77      0.77     10000
+
+tweets_svm_model  accuracy:  0.5303
+tweets_svm_model  confusion matrix is: 
+ [[4948 4684]
+ [  13  355]]
+              precision    recall  f1-score   support
+
+           0       0.51      1.00      0.68      4961
+           1       0.96      0.07      0.13      5039
+
+    accuracy                           0.53     10000
+   macro avg       0.74      0.53      0.40     10000
+weighted avg       0.74      0.53      0.40     10000
+
+amazon_svm_model  accuracy:  0.7334
+amazon_svm_model  confusion matrix is: 
+ [[2613  318]
+ [2348 4721]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.53      0.66      4961
+           1       0.67      0.94      0.78      5039
+
+    accuracy                           0.73     10000
+   macro avg       0.78      0.73      0.72     10000
+weighted avg       0.78      0.73      0.72     10000
+
+Comparing Logistic models on IMDB
+imdb_logistic_model  accuracy:  0.8514
+imdb_logistic_model  confusion matrix is: 
+ [[4230  755]
+ [ 731 4284]]
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      4961
+           1       0.85      0.85      0.85      5039
+
+    accuracy                           0.85     10000
+   macro avg       0.85      0.85      0.85     10000
+weighted avg       0.85      0.85      0.85     10000
+
+disney_logistic_model  accuracy:  0.7634
+disney_logistic_model  confusion matrix is: 
+ [[3352  757]
+ [1609 4282]]
+              precision    recall  f1-score   support
+
+           0       0.82      0.68      0.74      4961
+           1       0.73      0.85      0.78      5039
+
+    accuracy                           0.76     10000
+   macro avg       0.77      0.76      0.76     10000
+weighted avg       0.77      0.76      0.76     10000
+
+tweets_logistic_model  accuracy:  0.5515
+tweets_logistic_model  confusion matrix is: 
+ [[4939 4463]
+ [  22  576]]
+              precision    recall  f1-score   support
+
+           0       0.53      1.00      0.69      4961
+           1       0.96      0.11      0.20      5039
+
+    accuracy                           0.55     10000
+   macro avg       0.74      0.55      0.45     10000
+weighted avg       0.75      0.55      0.44     10000
+
+amazon_logistic_model  accuracy:  0.7578
+amazon_logistic_model  confusion matrix is: 
+ [[2970  431]
+ [1991 4608]]
+              precision    recall  f1-score   support
+
+           0       0.87      0.60      0.71      4961
+           1       0.70      0.91      0.79      5039
+
+    accuracy                           0.76     10000
+   macro avg       0.79      0.76      0.75     10000
+weighted avg       0.79      0.76      0.75     10000
+
+Comparing SVM models on disney
+imdb_svm_model  accuracy:  0.8349742147210502
+imdb_svm_model  confusion matrix is: 
+ [[ 754  407]
+ [1001 6370]]
+              precision    recall  f1-score   support
+
+           0       0.65      0.43      0.52      1755
+           1       0.86      0.94      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.76      0.68      0.71      8532
+weighted avg       0.82      0.83      0.82      8532
+
+disney_svm_model  accuracy:  0.8653305203938115
+disney_svm_model  confusion matrix is: 
+ [[ 974  368]
+ [ 781 6409]]
+              precision    recall  f1-score   support
+
+           0       0.73      0.55      0.63      1755
+           1       0.89      0.95      0.92      6777
+
+    accuracy                           0.87      8532
+   macro avg       0.81      0.75      0.77      8532
+weighted avg       0.86      0.87      0.86      8532
+
+tweets_svm_model  accuracy:  0.3904125644631974
+tweets_svm_model  confusion matrix is: 
+ [[1708 5154]
+ [  47 1623]]
+              precision    recall  f1-score   support
+
+           0       0.25      0.97      0.40      1755
+           1       0.97      0.24      0.38      6777
+
+    accuracy                           0.39      8532
+   macro avg       0.61      0.61      0.39      8532
+weighted avg       0.82      0.39      0.39      8532
+
+amazon_svm_model  accuracy:  0.806024378809189
+amazon_svm_model  confusion matrix is: 
+ [[ 159   59]
+ [1596 6718]]
+              precision    recall  f1-score   support
+
+           0       0.73      0.09      0.16      1755
+           1       0.81      0.99      0.89      6777
+
+    accuracy                           0.81      8532
+   macro avg       0.77      0.54      0.53      8532
+weighted avg       0.79      0.81      0.74      8532
+
+Comparing Logistic models on disney
+imdb_logistic_model  accuracy:  0.8326300984528833
+imdb_logistic_model  confusion matrix is: 
+ [[ 764  437]
+ [ 991 6340]]
+              precision    recall  f1-score   support
+
+           0       0.64      0.44      0.52      1755
+           1       0.86      0.94      0.90      6777
+
+    accuracy                           0.83      8532
+   macro avg       0.75      0.69      0.71      8532
+weighted avg       0.82      0.83      0.82      8532
+
+disney_logistic_model  accuracy:  0.8611111111111112
+disney_logistic_model  confusion matrix is: 
+ [[ 848  278]
+ [ 907 6499]]
+              precision    recall  f1-score   support
+
+           0       0.75      0.48      0.59      1755
+           1       0.88      0.96      0.92      6777
+
+    accuracy                           0.86      8532
+   macro avg       0.82      0.72      0.75      8532
+weighted avg       0.85      0.86      0.85      8532
+
+tweets_logistic_model  accuracy:  0.4363572433192686
+tweets_logistic_model  confusion matrix is: 
+ [[1688 4742]
+ [  67 2035]]
+              precision    recall  f1-score   support
+
+           0       0.26      0.96      0.41      1755
+           1       0.97      0.30      0.46      6777
+
+    accuracy                           0.44      8532
+   macro avg       0.62      0.63      0.44      8532
+weighted avg       0.82      0.44      0.45      8532
+
+amazon_logistic_model  accuracy:  0.8087201125175809
+amazon_logistic_model  confusion matrix is: 
+ [[ 239  116]
+ [1516 6661]]
+              precision    recall  f1-score   support
+
+           0       0.67      0.14      0.23      1755
+           1       0.81      0.98      0.89      6777
+
+    accuracy                           0.81      8532
+   macro avg       0.74      0.56      0.56      8532
+weighted avg       0.79      0.81      0.75      8532
+
+Comparing SVM models on tweets
+imdb_svm_model  accuracy:  0.7405803378085751
+imdb_svm_model  confusion matrix is: 
+ [[1338   75]
+ [ 524  372]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.72      0.82      1862
+           1       0.42      0.83      0.55       447
+
+    accuracy                           0.74      2309
+   macro avg       0.68      0.78      0.69      2309
+weighted avg       0.84      0.74      0.77      2309
+
+disney_svm_model  accuracy:  0.7310524036379386
+disney_svm_model  confusion matrix is: 
+ [[1323   82]
+ [ 539  365]]
+              precision    recall  f1-score   support
+
+           0       0.94      0.71      0.81      1862
+           1       0.40      0.82      0.54       447
+
+    accuracy                           0.73      2309
+   macro avg       0.67      0.76      0.68      2309
+weighted avg       0.84      0.73      0.76      2309
+
+tweets_svm_model  accuracy:  0.9129493287137289
+tweets_svm_model  confusion matrix is: 
+ [[1819  158]
+ [  43  289]]
+              precision    recall  f1-score   support
+
+           0       0.92      0.98      0.95      1862
+           1       0.87      0.65      0.74       447
+
+    accuracy                           0.91      2309
+   macro avg       0.90      0.81      0.84      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_svm_model  accuracy:  0.6175833694239931
+amazon_svm_model  confusion matrix is: 
+ [[1010   31]
+ [ 852  416]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.54      0.70      1862
+           1       0.33      0.93      0.49       447
+
+    accuracy                           0.62      2309
+   macro avg       0.65      0.74      0.59      2309
+weighted avg       0.85      0.62      0.66      2309
+
+Comparing Logistic models on tweets
+imdb_logistic_model  accuracy:  0.7388479861411866
+imdb_logistic_model  confusion matrix is: 
+ [[1334   75]
+ [ 528  372]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.72      0.82      1862
+           1       0.41      0.83      0.55       447
+
+    accuracy                           0.74      2309
+   macro avg       0.68      0.77      0.68      2309
+weighted avg       0.84      0.74      0.76      2309
+
+disney_logistic_model  accuracy:  0.7180597661325249
+disney_logistic_model  confusion matrix is: 
+ [[1289   78]
+ [ 573  369]]
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.80      1862
+           1       0.39      0.83      0.53       447
+
+    accuracy                           0.72      2309
+   macro avg       0.67      0.76      0.66      2309
+weighted avg       0.84      0.72      0.75      2309
+
+tweets_logistic_model  accuracy:  0.913382416630576
+tweets_logistic_model  confusion matrix is: 
+ [[1809  147]
+ [  53  300]]
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.95      1862
+           1       0.85      0.67      0.75       447
+
+    accuracy                           0.91      2309
+   macro avg       0.89      0.82      0.85      2309
+weighted avg       0.91      0.91      0.91      2309
+
+amazon_logistic_model  accuracy:  0.6652230402771763
+amazon_logistic_model  confusion matrix is: 
+ [[1127   38]
+ [ 735  409]]
+              precision    recall  f1-score   support
+
+           0       0.97      0.61      0.74      1862
+           1       0.36      0.91      0.51       447
+
+    accuracy                           0.67      2309
+   macro avg       0.66      0.76      0.63      2309
+weighted avg       0.85      0.67      0.70      2309
+
+Comparing SVM models on amazon
+imdb_svm_model  accuracy:  0.7520497761237425
+imdb_svm_model  confusion matrix is: 
+ [[3352 2930]
+ [1334 9581]]
+              precision    recall  f1-score   support
+
+           0       0.53      0.72      0.61      4686
+           1       0.88      0.77      0.82     12511
+
+    accuracy                           0.75     17197
+   macro avg       0.71      0.74      0.71     17197
+weighted avg       0.78      0.75      0.76     17197
+
+disney_svm_model  accuracy:  0.7786823283130778
+disney_svm_model  confusion matrix is: 
+ [[ 2726  1846]
+ [ 1960 10665]]
+              precision    recall  f1-score   support
+
+           0       0.60      0.58      0.59      4686
+           1       0.84      0.85      0.85     12511
+
+    accuracy                           0.78     17197
+   macro avg       0.72      0.72      0.72     17197
+weighted avg       0.78      0.78      0.78     17197
+
+tweets_svm_model  accuracy:  0.4718846310402977
+tweets_svm_model  confusion matrix is: 
+ [[4562 8958]
+ [ 124 3553]]
+              precision    recall  f1-score   support
+
+           0       0.34      0.97      0.50      4686
+           1       0.97      0.28      0.44     12511
+
+    accuracy                           0.47     17197
+   macro avg       0.65      0.63      0.47     17197
+weighted avg       0.79      0.47      0.46     17197
+
+amazon_svm_model  accuracy:  0.8393324417049486
+amazon_svm_model  confusion matrix is: 
+ [[ 2488   565]
+ [ 2198 11946]]
+              precision    recall  f1-score   support
+
+           0       0.81      0.53      0.64      4686
+           1       0.84      0.95      0.90     12511
+
+    accuracy                           0.84     17197
+   macro avg       0.83      0.74      0.77     17197
+weighted avg       0.84      0.84      0.83     17197
+
+Comparing Logistic models on amazon
+imdb_logistic_model  accuracy:  0.7540268651508985
+imdb_logistic_model  confusion matrix is: 
+ [[3299 2843]
+ [1387 9668]]
+              precision    recall  f1-score   support
+
+           0       0.54      0.70      0.61      4686
+           1       0.87      0.77      0.82     12511
+
+    accuracy                           0.75     17197
+   macro avg       0.71      0.74      0.71     17197
+weighted avg       0.78      0.75      0.76     17197
+
+disney_logistic_model  accuracy:  0.7852532418445077
+disney_logistic_model  confusion matrix is: 
+ [[ 2649  1656]
+ [ 2037 10855]]
+              precision    recall  f1-score   support
+
+           0       0.62      0.57      0.59      4686
+           1       0.84      0.87      0.85     12511
+
+    accuracy                           0.79     17197
+   macro avg       0.73      0.72      0.72     17197
+weighted avg       0.78      0.79      0.78     17197
+
+tweets_logistic_model  accuracy:  0.48805024132116065
+tweets_logistic_model  confusion matrix is: 
+ [[4521 8639]
+ [ 165 3872]]
+              precision    recall  f1-score   support
+
+           0       0.34      0.96      0.51      4686
+           1       0.96      0.31      0.47     12511
+
+    accuracy                           0.49     17197
+   macro avg       0.65      0.64      0.49     17197
+weighted avg       0.79      0.49      0.48     17197
+
+amazon_logistic_model  accuracy:  0.8415421294411816
+amazon_logistic_model  confusion matrix is: 
+ [[ 2756   795]
+ [ 1930 11716]]
+              precision    recall  f1-score   support
+
+           0       0.78      0.59      0.67      4686
+           1       0.86      0.94      0.90     12511
+
+    accuracy                           0.84     17197
+   macro avg       0.82      0.76      0.78     17197
+weighted avg       0.84      0.84      0.83     17197
+
+
+Process finished with exit code 0
+

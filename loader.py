@@ -2,7 +2,7 @@ import pandas as pd
 import re
 import os
 import gensim.downloader as api
-import tensorflow_datasets as tfds
+# import tensorflow_datasets as tfds
 import pickle
 
 HTML_TAG_RE = re.compile(r'<[^>]+>')
