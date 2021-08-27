@@ -12,6 +12,11 @@ import os
 
 
 # ---------------------------------------------------- Mutual to all
+
+MAX_SENTIMENT_SIZE = 2363
+MAX_REVIEW_LENGTH = 50
+
+
 def turn_sentence_to_encoding(sentence: str):
     """
     Turns sentence into an average vector of the encodings of the words in the sentence.
@@ -32,6 +37,30 @@ def turn_sentence_to_encoding(sentence: str):
     return embeddings_sum / num_relevant_words
 
 
+def turn_sentence_to_encoding_limiting_length(sentence: str):
+    """
+    Turns sentence into an average vector of the encodings of the words in the sentence.
+    Not including stop words
+    Limits sentance length to 50
+    returns np array
+    """
+    words = sentence.split()
+    embeddings_sum = np.zeros(loader.W2V_EMBEDDING_DIM)
+    num_relevant_words = 0
+    length = min(MAX_REVIEW_LENGTH, len(words))
+    for i in range(length):
+        word = words[i]
+        if word not in GENERAL_STOPWORDS and word in w2v_model:
+            embeddings_sum = embeddings_sum + w2v_model[word]
+            num_relevant_words += 1
+
+    if num_relevant_words == 0:
+        return np.zeros(loader.W2V_EMBEDDING_DIM)
+
+    return embeddings_sum / num_relevant_words
+
+
+
 # Investigating the data
 def show_word_cloud(texsts, data_name, stopwords=STOPWORDS):
     wordcloud = WordCloud(stopwords=stopwords,
@@ -47,12 +76,42 @@ def show_word_cloud(texsts, data_name, stopwords=STOPWORDS):
     fig.savefig(plot_path)
 
 
+def limit_dataset_size(reviews):
+    """
+    Returns a dataset where the amounts of samples that are positive
+    and negative are limited by the number of positive and negative samples of
+    the samllest dataset.
+    """
+    positive_reviews = reviews[reviews['sentiment'] == 'positive'].head(MAX_SENTIMENT_SIZE)
+    negative_reviews = reviews[reviews['sentiment'] == 'negative'].head(MAX_SENTIMENT_SIZE)
+    return pd.concat([positive_reviews, negative_reviews])
+
+
+def make_positive_and_negative_equal_size(reviews, data_name):
+    """
+    Returns a dataset where the amounts of samples that are positive
+    and negative are equal.
+    """
+    sentiment_size = min(reviews['sentiment'].value_counts())
+    print("Both positive and negative size in ", data_name, " is: ", sentiment_size)
+    positive_reviews = reviews[reviews['sentiment'] == 'positive'].head(
+        sentiment_size)
+    negative_reviews = reviews[reviews['sentiment'] == 'negative'].head(
+        sentiment_size)
+    return pd.concat([positive_reviews, negative_reviews])
+
+
 def create_model_and_split_data(reviews, data_name):
-    reviews_encoded = [turn_sentence_to_encoding(sentance) for sentance in reviews['review']]
 
-    sentiment = reviews['sentiment'].map({'positive': 1, 'negative': 0})
+    # limited_reviews = limit_dataset_size(reviews)
 
-    # TODO add limit to smallest dataset size if needed
+    # limited_reviews = make_positive_and_negative_equal_size(reviews, data_name)
+
+    limited_reviews = reviews
+
+    reviews_encoded = [turn_sentence_to_encoding_limiting_length(sentance) for sentance in limited_reviews['review']]
+
+    sentiment = limited_reviews['sentiment'].map({'positive': 1, 'negative': 0})
 
     X_train, X_test, y_train, y_test = train_test_split(
         reviews_encoded, sentiment, test_size=0.2, random_state=42)
@@ -96,21 +155,16 @@ def load_model(path):
 def show_models_results_on_data(models, model_names, x_test, y_test, comparison_name, data_name):
     print(comparison_name)
 
-    # Consider sending as two lists: models, model_names
-
     for i in range(len(models)):
-        show_model_success_on_dataset(models[i], model_names[i], x_test, y_test)
+        show_model_success_on_dataset(models[i], model_names[i], x_test, y_test, data_name)
 
     compare_models_results_via_plot(models, model_names, x_test, y_test, data_name)
 
 
-def show_model_success_on_dataset(model, model_name, x_test, y_test):
-    # Confusion Matrix is a table showing from left top: TP, FN, FP, TN
+def show_model_success_on_dataset(model, model_name, x_test, y_test, data_name):
     y_predicted = model.predict(x_test)
     print(model_name, " accuracy: ",
-          accuracy_score(y_predicted, y_test))
-    cm = confusion_matrix(y_predicted, y_test)
-    print(model_name, " confusion matrix is: \n", cm)
+          accuracy_score(y_predicted, y_test), " on ", data_name)
     print(classification_report(y_test, y_predicted))
 
 
@@ -146,7 +200,7 @@ def compare_models_results_via_plot(models, model_names, x_test, y_test, data_na
     plt.yticks(np.arange(0.0, 1.1, step=0.1))
     plt.ylabel("True Positive Rate", fontsize=15)
 
-    plt.title('ROC Curve Analysis', fontweight='bold', fontsize=15)
+    plt.title('ROC Curve Analysis ' + data_name, fontweight='bold', fontsize=15)
     plt.legend(prop={'size': 13}, loc='lower right')
 
     plt.show()
@@ -180,6 +234,7 @@ def create_imdb_models_and_split_data():
     # Load imdb reviews data
     movie_reviews = loader.load_imdb_data()
     print(movie_reviews.head())
+    print(movie_reviews['sentiment'].value_counts())
     # explore_imdb_data(movie_reviews)
 
     return create_model_and_split_data(movie_reviews, "IMDB")
@@ -211,7 +266,8 @@ def create_disney_models_and_split_data():
     # Load disney reviews data
     disney_reviews = loader.load_disneyland_data()
     print(disney_reviews.head())
-    explore_disney_data(disney_reviews)
+    print(disney_reviews['sentiment'].value_counts())
+    # explore_disney_data(disney_reviews)
 
     return create_model_and_split_data(disney_reviews, "disney")
 
@@ -236,7 +292,8 @@ def create_tweets_models_and_split_data():
     # Load tweets data
     tweets = loader.load_tweets_data()
     print(tweets.head())
-    explore_tweets_data(tweets)
+    print(tweets['sentiment'].value_counts())
+    # explore_tweets_data(tweets)
 
     return create_model_and_split_data(tweets, "tweets")
 
@@ -267,6 +324,7 @@ def create_amazon_models_and_split_data():
     # Load amazon reviews data
     reviews = loader.load_amazon_data()
     print(reviews.head())
+    print(reviews['sentiment'].value_counts())
     # explore_amazon_data(reviews)
 
     return create_model_and_split_data(reviews, "amazon")
@@ -284,7 +342,6 @@ if __name__ == '__main__':
     GENERAL_STOPWORDS = set(STOPWORDS)
     GENERAL_STOPWORDS.remove('not')
     GENERAL_STOPWORDS.remove('no')
-    # TODO remove cumulative undesirable stopwords revealed during word cloud - will improve performance
 
     imdb_svm_model, imdb_logistic_model, imdb_x_test, imdb_y_test = create_imdb_models_and_split_data()
 
