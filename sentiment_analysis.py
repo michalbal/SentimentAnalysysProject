@@ -60,7 +60,6 @@ def turn_sentence_to_encoding_limiting_length(sentence: str):
     return embeddings_sum / num_relevant_words
 
 
-
 # Investigating the data
 def show_word_cloud(texsts, data_name, stopwords=STOPWORDS):
     wordcloud = WordCloud(stopwords=stopwords,
@@ -93,7 +92,7 @@ def make_positive_and_negative_equal_size(reviews, data_name):
     and negative are equal.
     """
     sentiment_size = min(reviews['sentiment'].value_counts())
-    print("Both positive and negative size in ", data_name, " is: ", sentiment_size)
+    print("Both positive and negative amounts in ", data_name, " is: ", sentiment_size)
     positive_reviews = reviews[reviews['sentiment'] == 'positive'].head(
         sentiment_size)
     negative_reviews = reviews[reviews['sentiment'] == 'negative'].head(
@@ -109,7 +108,7 @@ def create_model_and_split_data(reviews, data_name):
 
     limited_reviews = reviews
 
-    reviews_encoded = [turn_sentence_to_encoding_limiting_length(sentance) for sentance in limited_reviews['review']]
+    reviews_encoded = [turn_sentence_to_encoding(sentance) for sentance in limited_reviews['review']]
 
     sentiment = limited_reviews['sentiment'].map({'positive': 1, 'negative': 0})
 
@@ -124,9 +123,6 @@ def create_model_and_split_data(reviews, data_name):
     else:
         svm_model = load_model(svm_model_path)
 
-    accuracy_svm_on_test = svm_model.score(X_test, y_test)
-    print(data_name, " svm accuracy on test is: ", accuracy_svm_on_test)
-
     logistic_model_path = ".\models\\" + data_name + "_logistic_model.pkl"
     if not os.path.exists(logistic_model_path):
         logistic_model = LogisticRegression(max_iter=300)
@@ -134,10 +130,6 @@ def create_model_and_split_data(reviews, data_name):
         save_model(logistic_model, logistic_model_path)
     else:
         logistic_model = load_model(logistic_model_path)
-
-    accuracy_logistic_on_test = logistic_model.score(X_test, y_test)
-    print(data_name, " logistic accuracy on test is: ",
-          accuracy_logistic_on_test)
 
     return svm_model, logistic_model, X_test, y_test
 
@@ -195,7 +187,7 @@ def compare_models_results_via_plot(models, model_names, x_test, y_test, data_na
     plt.plot([0, 1], [0, 1], color='orange', linestyle='--')
 
     plt.xticks(np.arange(0.0, 1.1, step=0.1))
-    plt.xlabel("Flase Positive Rate", fontsize=15)
+    plt.xlabel("False Positive Rate", fontsize=15)
 
     plt.yticks(np.arange(0.0, 1.1, step=0.1))
     plt.ylabel("True Positive Rate", fontsize=15)
@@ -210,10 +202,11 @@ def compare_models_results_via_plot(models, model_names, x_test, y_test, data_na
 
 # ---------------------------------------------------- IMDB data
 
-def explore_imdb_data(movie_reviews):
-    # Show how many positive and negative values exist
-    print(movie_reviews['sentiment'].value_counts())
+IMDB_STOPWORDS = {'film', 'movie', 'one', 'character', 'time', 'see',
+                      'make', 'director', 'play', 'scene'}
 
+
+def explore_imdb_data(movie_reviews):
     positive_reviews = movie_reviews[movie_reviews['sentiment'] == 'positive']
     positive_words = ' '.join(positive_reviews['review'])
     show_word_cloud(positive_words, "IMDB_positive_all_stopwords")
@@ -233,7 +226,10 @@ def explore_imdb_data(movie_reviews):
 def create_imdb_models_and_split_data():
     # Load imdb reviews data
     movie_reviews = loader.load_imdb_data()
-    print(movie_reviews.head())
+    # print(movie_reviews.head())
+
+    # Show how many positive and negative values exist
+    print("IMDB counts:")
     print(movie_reviews['sentiment'].value_counts())
     # explore_imdb_data(movie_reviews)
 
@@ -242,10 +238,11 @@ def create_imdb_models_and_split_data():
 # ---------------------------------------------------- Disney data
 
 
-def explore_disney_data(disney_reviews):
-    # Show how many positive and negative values exist
-    print(disney_reviews['sentiment'].value_counts())
+DISNEY_STOPWORDS = {'ride', 'park', 'day', 'time', 'disneyland', 'disney',
+                        'rides', 'one', 'go', 'kid', 'kids'}
 
+
+def explore_disney_data(disney_reviews):
     positive_reviews = disney_reviews[disney_reviews['sentiment'] == 'positive']
     positive_words = ' '.join(positive_reviews['review'])
     show_word_cloud(positive_words, "disney_positive_all_stopwords")
@@ -265,7 +262,10 @@ def explore_disney_data(disney_reviews):
 def create_disney_models_and_split_data():
     # Load disney reviews data
     disney_reviews = loader.load_disneyland_data()
-    print(disney_reviews.head())
+    # print(disney_reviews.head())
+
+    # Show how many positive and negative values exist
+    print("Disney counts:")
     print(disney_reviews['sentiment'].value_counts())
     # explore_disney_data(disney_reviews)
 
@@ -274,10 +274,10 @@ def create_disney_models_and_split_data():
 
 # ---------------------------------------------------- Tweet data
 
+TWITTER_STOPWORDS = {'airline', 'airport', 'fly', 'plane', 'pilot', 'flight'}
+
 
 def explore_tweets_data(tweets):
-    # Show how many positive and negative values exist
-    print(tweets['sentiment'].value_counts())
 
     positive_tweets = tweets[tweets['sentiment'] == 'positive']
     positive_words = ' '.join(positive_tweets['review'])
@@ -291,7 +291,10 @@ def explore_tweets_data(tweets):
 def create_tweets_models_and_split_data():
     # Load tweets data
     tweets = loader.load_tweets_data()
-    print(tweets.head())
+    # print(tweets.head())
+
+    # Show how many positive and negative values exist
+    print("Tweets counts:")
     print(tweets['sentiment'].value_counts())
     # explore_tweets_data(tweets)
 
@@ -300,10 +303,10 @@ def create_tweets_models_and_split_data():
 # ---------------------------------------------------- Tweet data
 
 
-def explore_amazon_data(reviews):
-    # Show how many positive and negative values exist
-    print(reviews['sentiment'].value_counts())
+AMAZON_STOPWORDS = {'product', 'one', 'time', 'use', 'amazon'}
 
+
+def explore_amazon_data(reviews):
     positive_reviews = reviews[reviews['sentiment'] == 'positive']
     positive_words = ' '.join(positive_reviews['review'])
     show_word_cloud(positive_words, "amazon_positive_all_stopwords")
@@ -314,7 +317,7 @@ def explore_amazon_data(reviews):
 
     # Now let's see the most common words without the words both Negative and Positive share
     amazon_stopwords = set(STOPWORDS).union(
-        {'product', 'one', 'time'})
+        {'product', 'one', 'time', 'use', 'amazon'})
     show_word_cloud(positive_words, "amazon_positive_cleared_mutual_stopwords", amazon_stopwords)
 
     show_word_cloud(negative_words, "amazon_negative_cleared_mutual_stopwords", amazon_stopwords)
@@ -323,7 +326,10 @@ def explore_amazon_data(reviews):
 def create_amazon_models_and_split_data():
     # Load amazon reviews data
     reviews = loader.load_amazon_data()
-    print(reviews.head())
+    # print(reviews.head())
+
+    # Show how many positive and negative values exist
+    print("Amazon counts:")
     print(reviews['sentiment'].value_counts())
     # explore_amazon_data(reviews)
 
@@ -342,6 +348,12 @@ if __name__ == '__main__':
     GENERAL_STOPWORDS = set(STOPWORDS)
     GENERAL_STOPWORDS.remove('not')
     GENERAL_STOPWORDS.remove('no')
+
+    # Adding stopwords specific for these datasets
+    GENERAL_STOPWORDS = GENERAL_STOPWORDS.union(IMDB_STOPWORDS)
+    GENERAL_STOPWORDS = GENERAL_STOPWORDS.union(DISNEY_STOPWORDS)
+    GENERAL_STOPWORDS = GENERAL_STOPWORDS.union(TWITTER_STOPWORDS)
+    GENERAL_STOPWORDS = GENERAL_STOPWORDS.union(AMAZON_STOPWORDS)
 
     imdb_svm_model, imdb_logistic_model, imdb_x_test, imdb_y_test = create_imdb_models_and_split_data()
 
@@ -371,39 +383,39 @@ if __name__ == '__main__':
 
     # Compare all svm models on disney data
     show_models_results_on_data(svm_models, svm_models_names, disney_x_test,
-                                disney_y_test, "Comparing SVM models on disney",
-                                "disney_svm")
+                                disney_y_test, "Comparing SVM models on Disney",
+                                "Disney_SVM")
 
     # Compare all logistic models on disney data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 disney_x_test,
                                 disney_y_test,
-                                "Comparing Logistic models on disney",
-                                "disney_logistic")
+                                "Comparing Logistic models on Disney",
+                                "Disney_logistic")
 
     # Compare all svm models on tweets data
 
     show_models_results_on_data(svm_models, svm_models_names, tweets_x_test,
-                                tweets_y_test, "Comparing SVM models on tweets",
-                                "tweets_svm")
+                                tweets_y_test, "Comparing SVM models on Tweets",
+                                "Tweets_SVM")
     # Compare all logistic models on tweets data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 tweets_x_test,
                                 tweets_y_test,
-                                "Comparing Logistic models on tweets",
-                                "tweets_logistic")
+                                "Comparing Logistic models on Tweets",
+                                "Tweets_logistic")
 
     # Compare all svm models on amazon data
 
     show_models_results_on_data(svm_models, svm_models_names, amazon_x_test,
-                                amazon_y_test, "Comparing SVM models on amazon",
-                                "amazon_svm")
+                                amazon_y_test, "Comparing SVM models on Amazon",
+                                "Amazon_SVM")
     # Compare all logistic models on amazon data
     show_models_results_on_data(logistic_models, logistic_models_names,
                                 amazon_x_test,
                                 amazon_y_test,
-                                "Comparing Logistic models on amazon",
-                                "amazon_logistic")
+                                "Comparing Logistic models on Amazon",
+                                "Amazon_logistic")
 
 
 
